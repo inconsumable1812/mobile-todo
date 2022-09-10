@@ -5,7 +5,9 @@ import {
   Text,
   TextInput,
   TouchableHighlight,
-  Modal
+  Modal,
+  TouchableOpacity,
+  TouchableWithoutFeedback
 } from 'react-native';
 import { MAIN_TEXT_COLOR, MAIN_BUTTON_COLOR } from '../../../constants';
 
@@ -23,36 +25,42 @@ export const AddTodoPopUp: FC<Props> = ({ isOpen, onPress }) => {
           transparent={true}
           animationType={'fade'}
         >
-          <View style={styles.wrapper}>
-            <View style={styles.container}>
-              <View style={styles.main}>
-                <Text style={styles.caption}>Добавить предмет</Text>
-                <Text style={styles.description}>
-                  Укажите заголовок и задание
-                </Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Заголовок"
-                ></TextInput>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Задание"
-                ></TextInput>
-              </View>
-              <View style={styles.buttons}>
-                <TouchableHighlight
-                  style={{ ...styles.button, ...styles.buttonBorder }}
-                  underlayColor={'#ffffff'}
-                  onPress={onPress}
-                >
-                  <Text style={styles.cancel}>Отменить</Text>
-                </TouchableHighlight>
-                <View style={styles.button}>
-                  <Text style={styles.save}>Сохранить</Text>
+          <TouchableOpacity
+            style={styles.wrapper}
+            activeOpacity={1}
+            onPressOut={onPress}
+          >
+            <TouchableWithoutFeedback>
+              <View style={styles.container}>
+                <View style={styles.main}>
+                  <Text style={styles.caption}>Добавить предмет</Text>
+                  <Text style={styles.description}>
+                    Укажите заголовок и задание
+                  </Text>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Заголовок"
+                  ></TextInput>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Задание"
+                  ></TextInput>
+                </View>
+                <View style={styles.buttons}>
+                  <TouchableHighlight
+                    style={{ ...styles.button, ...styles.buttonBorder }}
+                    underlayColor={'#ffffff'}
+                    onPress={onPress}
+                  >
+                    <Text style={styles.cancel}>Отменить</Text>
+                  </TouchableHighlight>
+                  <View style={styles.button}>
+                    <Text style={styles.save}>Сохранить</Text>
+                  </View>
                 </View>
               </View>
-            </View>
-          </View>
+            </TouchableWithoutFeedback>
+          </TouchableOpacity>
         </Modal>
       )}
     </>

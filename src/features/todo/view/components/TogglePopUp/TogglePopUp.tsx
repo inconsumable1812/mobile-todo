@@ -4,7 +4,9 @@ import {
   View,
   Text,
   Modal,
-  TouchableHighlight
+  TouchableHighlight,
+  TouchableOpacity,
+  TouchableWithoutFeedback
 } from 'react-native';
 import { MAIN_BUTTON_COLOR } from '../../../constants';
 
@@ -43,31 +45,37 @@ export const TogglePopUp: FC<Props> = ({
           transparent={true}
           animationType={'fade'}
         >
-          <View style={styles.wrapper}>
-            <View style={styles.container}>
-              <TouchableHighlight
-                style={{ ...styles.button, ...styles.buttonBottomBorder }}
-                underlayColor={'#ffffff'}
-                onPress={onPress}
-              >
-                <Text style={showAll}>Показывать все задания</Text>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={{ ...styles.button, ...styles.buttonBottomBorder }}
-                underlayColor={'#ffffff'}
-                onPress={onPress}
-              >
-                <Text style={showDone}>Выполненные</Text>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={{ ...styles.button, ...styles.buttonBottomBorder }}
-                underlayColor={'#ffffff'}
-                onPress={onPress}
-              >
-                <Text style={showNotDone}>Не выполненные</Text>
-              </TouchableHighlight>
-            </View>
-          </View>
+          <TouchableOpacity
+            style={styles.wrapper}
+            activeOpacity={1}
+            onPressOut={onPress}
+          >
+            <TouchableWithoutFeedback>
+              <View style={styles.container}>
+                <TouchableHighlight
+                  style={{ ...styles.button, ...styles.buttonBottomBorder }}
+                  underlayColor={'#ffffff'}
+                  onPress={onPress}
+                >
+                  <Text style={showAll}>Показывать все задания</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  style={{ ...styles.button, ...styles.buttonBottomBorder }}
+                  underlayColor={'#ffffff'}
+                  onPress={onPress}
+                >
+                  <Text style={showDone}>Выполненные</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  style={{ ...styles.button, ...styles.buttonBottomBorder }}
+                  underlayColor={'#ffffff'}
+                  onPress={onPress}
+                >
+                  <Text style={showNotDone}>Не выполненные</Text>
+                </TouchableHighlight>
+              </View>
+            </TouchableWithoutFeedback>
+          </TouchableOpacity>
         </Modal>
       )}
     </>
