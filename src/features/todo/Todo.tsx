@@ -1,20 +1,20 @@
 import { FC } from 'react';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectTodo } from './redux/slice';
 import { AddTodoButton } from './view/components/AddTodoButton/AddTodoButton';
-import { TodoItem } from './view/components/TodoItem/TodoItem';
+import { TodoList } from './view/components/TodoList/TodoList';
 import { ToggleTodoButton } from './view/components/ToggleTodoButton/ToggleTodoButton';
 
 type Props = {};
 
 export const Todo: FC<Props> = () => {
   const dispatch = useAppDispatch();
-  // const { status, error } = useAppSelector(selectLogin);
+  const { todos } = useAppSelector(selectTodo);
 
   return (
     <>
       <ToggleTodoButton />
-      <TodoItem></TodoItem>
+      <TodoList todos={todos}></TodoList>
       <AddTodoButton></AddTodoButton>
     </>
   );

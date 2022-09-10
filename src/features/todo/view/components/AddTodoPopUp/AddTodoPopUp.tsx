@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -9,7 +9,10 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback
 } from 'react-native';
+import { useAppDispatch } from '../../../../../app/hooks';
 import { MAIN_TEXT_COLOR, MAIN_BUTTON_COLOR } from '../../../constants';
+import { addTodo } from '../../../redux/slice';
+import { TodoItem } from '../../../types';
 
 type Props = {
   isOpen: boolean;
@@ -17,6 +20,27 @@ type Props = {
 };
 
 export const AddTodoPopUp: FC<Props> = ({ isOpen, onPress }) => {
+  const dispatch = useAppDispatch();
+  const [caption, setCaption] = useState('');
+  const [description, setDescription] = useState('');
+  const resetHandler = () => {
+    setCaption('');
+    setDescription('');
+    onPress();
+  };
+
+  const addTodoHandler = () => {
+    if (caption.trim().length === 0 || description.trim().length === 0) return;
+    const newItem: TodoItem = {
+      caption,
+      description,
+      id: new Date().getTime(),
+      isDone: false
+    };
+    dispatch(addTodo(newItem));
+    resetHandler();
+  };
+
   return (
     <>
       {isOpen && (
@@ -38,25 +62,33 @@ export const AddTodoPopUp: FC<Props> = ({ isOpen, onPress }) => {
                     Укажите заголовок и задание
                   </Text>
                   <TextInput
+                    value={caption}
                     style={styles.input}
                     placeholder="Заголовок"
+                    onChangeText={setCaption}
                   ></TextInput>
                   <TextInput
+                    value={description}
                     style={styles.input}
                     placeholder="Задание"
+                    onChangeText={setDescription}
                   ></TextInput>
                 </View>
                 <View style={styles.buttons}>
                   <TouchableHighlight
                     style={{ ...styles.button, ...styles.buttonBorder }}
                     underlayColor={'#ffffff'}
-                    onPress={onPress}
+                    onPress={resetHandler}
                   >
                     <Text style={styles.cancel}>Отменить</Text>
                   </TouchableHighlight>
-                  <View style={styles.button}>
+                  <TouchableHighlight
+                    style={styles.button}
+                    underlayColor={'#ffffff'}
+                    onPress={addTodoHandler}
+                  >
                     <Text style={styles.save}>Сохранить</Text>
-                  </View>
+                  </TouchableHighlight>
                 </View>
               </View>
             </TouchableWithoutFeedback>
@@ -114,12 +146,12 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    borderBottomLeftRadius: 7
+    justifyContent: 'center'
   },
   buttonBorder: {
     borderRightWidth: 1,
-    borderColor: '#fff'
+    borderColor: '#fff',
+    borderBottomLeftRadius: 7
   },
   cancel: {
     color: MAIN_BUTTON_COLOR,

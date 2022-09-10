@@ -7,26 +7,21 @@ import {
   SECOND_TEXT_LINE_HEIGHT,
   SECOND_TEXT_SIZE
 } from '../../../constants';
+import { TodoItem as TodoItemType } from '../../../types';
 import { DoneIcon } from '../DoneIcon/DoneIcon';
 import { TrashIcon } from '../TrashIcon/TrashIcon';
 
-type Props = {};
+type Props = Pick<TodoItemType, 'caption' | 'description' | 'isDone'>;
 
-export const TodoItem: FC<Props> = () => {
-  const [isDone, setIsDone] = useState(false);
-
-  const handler = () => {
-    setIsDone((prev) => !prev);
-  };
-
+export const TodoItem: FC<Props> = ({ caption, description, isDone }) => {
   return (
     <View style={styles.container}>
-      <TouchableHighlight onPress={handler} underlayColor={'transparent'}>
+      <TouchableHighlight underlayColor={'transparent'}>
         <DoneIcon isDone={isDone}></DoneIcon>
       </TouchableHighlight>
-      <View>
-        <Text style={styles.caption}>Математика</Text>
-        <Text style={styles.description}>стр.4</Text>
+      <View style={styles.body}>
+        <Text style={styles.caption}>{caption}</Text>
+        <Text style={styles.description}>{description}</Text>
       </View>
       <View style={styles.trashContainer}>
         <TrashIcon />
@@ -64,5 +59,9 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: '#F8F8F8',
     borderRadius: 8
+  },
+  body: {
+    flex: 1,
+    marginLeft: 15
   }
 });
