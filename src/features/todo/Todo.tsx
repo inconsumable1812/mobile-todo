@@ -8,13 +8,25 @@ import { ToggleTodoButton } from './view/components/ToggleTodoButton/ToggleTodoB
 type Props = {};
 
 export const Todo: FC<Props> = () => {
-  const dispatch = useAppDispatch();
-  const { todos } = useAppSelector(selectTodo);
+  const { todos, filter } = useAppSelector(selectTodo);
+  let filteredTodos = todos;
+
+  switch (filter) {
+    case 'Выполненные':
+      filteredTodos = todos.filter((todo) => todo.isDone);
+      break;
+    case 'Не выполненные':
+      filteredTodos = todos.filter((todo) => !todo.isDone);
+      break;
+    default:
+      filteredTodos = todos;
+      break;
+  }
 
   return (
     <>
       <ToggleTodoButton />
-      <TodoList todos={todos}></TodoList>
+      <TodoList todos={filteredTodos}></TodoList>
       <AddTodoButton></AddTodoButton>
     </>
   );

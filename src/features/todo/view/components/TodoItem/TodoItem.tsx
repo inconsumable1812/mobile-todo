@@ -1,31 +1,52 @@
 import { FC, useState } from 'react';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { useAppDispatch } from '../../../../../app/hooks';
 import {
+  DONE_TEXT_COLOR,
   MAIN_TEXT_COLOR,
   MAIN_TEXT_LINE_HEIGHT,
   MAIN_TEXT_SIZE,
   SECOND_TEXT_LINE_HEIGHT,
   SECOND_TEXT_SIZE
 } from '../../../constants';
+import { removeTodo, toggleTodo } from '../../../redux/slice';
 import { TodoItem as TodoItemType } from '../../../types';
 import { DoneIcon } from '../DoneIcon/DoneIcon';
 import { TrashIcon } from '../TrashIcon/TrashIcon';
 
-type Props = Pick<TodoItemType, 'caption' | 'description' | 'isDone'>;
+type Props = TodoItemType;
 
-export const TodoItem: FC<Props> = ({ caption, description, isDone }) => {
+export const TodoItem: FC<Props> = ({ caption, description, isDone, id }) => {
+  const dispatch = useAppDispatch();
+  const removeTodoHandler = () => {
+    dispatch(removeTodo(id));
+  };
+  const toggleTodoHandler = () => {
+    dispatch(toggleTodo(id));
+  };
+  const descriptionStyle = isDone
+    ? { ...styles.description, ...styles.descriptionDone }
+    : { ...styles.description, ...styles.descriptionNotDone };
+
   return (
     <View style={styles.container}>
-      <TouchableHighlight underlayColor={'transparent'}>
+      <TouchableHighlight
+        underlayColor={'transparent'}
+        onPress={toggleTodoHandler}
+      >
         <DoneIcon isDone={isDone}></DoneIcon>
       </TouchableHighlight>
       <View style={styles.body}>
         <Text style={styles.caption}>{caption}</Text>
-        <Text style={styles.description}>{description}</Text>
+        <Text style={descriptionStyle}>{description}</Text>
       </View>
-      <View style={styles.trashContainer}>
+      <TouchableHighlight
+        style={styles.trashContainer}
+        underlayColor={'transparent'}
+        onPress={removeTodoHandler}
+      >
         <TrashIcon />
-      </View>
+      </TouchableHighlight>
     </View>
   );
 };
@@ -48,9 +69,15 @@ const styles = StyleSheet.create({
     color: MAIN_TEXT_COLOR
   },
   description: {
-    color: MAIN_TEXT_COLOR,
     lineHeight: SECOND_TEXT_LINE_HEIGHT,
     fontSize: SECOND_TEXT_SIZE
+  },
+  descriptionDone: {
+    color: DONE_TEXT_COLOR,
+    textDecorationLine: 'line-through'
+  },
+  descriptionNotDone: {
+    color: MAIN_TEXT_COLOR
   },
   trashContainer: {
     alignItems: 'center',

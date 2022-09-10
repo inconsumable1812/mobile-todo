@@ -9,10 +9,10 @@ import {
 } from './constants';
 
 type Props = {
-  isDone?: boolean;
+  isDone: boolean;
 };
 
-export const DoneIcon: FC<Props> = ({ isDone = false }) => {
+export const DoneIcon: FC<Props> = ({ isDone }) => {
   const containerStyle = isDone
     ? { ...styles.containerShared, ...styles.containerIsDone }
     : { ...styles.containerShared, ...styles.container };

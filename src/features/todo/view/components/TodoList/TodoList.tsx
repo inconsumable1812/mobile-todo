@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { TodoItem } from '../../../types';
 import { TodoItem as TodoComponent } from '../TodoItem/TodoItem';
@@ -20,6 +20,7 @@ export const TodoList: FC<Props> = ({ todos }) => {
               caption={item.caption}
               description={item.description}
               isDone={item.isDone}
+              id={item.id}
             />
           )}
           keyExtractor={(item) => item.id.toString()}
@@ -37,6 +38,8 @@ const styles = StyleSheet.create({
     marginVertical: 27
   },
   text: {
-    fontSize: 16
+    fontSize: 16,
+    fontWeight: '500',
+    marginHorizontal: 19
   }
 });

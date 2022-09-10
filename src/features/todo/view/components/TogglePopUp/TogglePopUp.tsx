@@ -8,19 +8,19 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback
 } from 'react-native';
+import { useAppDispatch } from '../../../../../app/hooks';
 import { MAIN_BUTTON_COLOR } from '../../../constants';
+import { changeFilterName } from '../../../redux/slice';
+import { FilterName } from '../../../types';
 
 type Props = {
   isOpen: boolean;
-  activeName: 'Показывать все задания' | 'Выполненные' | 'Не выполненные';
+  activeName: FilterName;
   onPress: () => void;
 };
 
-export const TogglePopUp: FC<Props> = ({
-  isOpen = false,
-  activeName = 'Показывать все задания',
-  onPress
-}) => {
+export const TogglePopUp: FC<Props> = ({ isOpen, activeName, onPress }) => {
+  const dispatch = useAppDispatch();
   let showAll = { ...styles.buttonText };
   let showDone = { ...styles.buttonText };
   let showNotDone = { ...styles.buttonText };
@@ -36,6 +36,24 @@ export const TogglePopUp: FC<Props> = ({
       showNotDone = { ...showNotDone, ...styles.active };
       break;
   }
+
+  const showAllHandler = () => {
+    if (activeName === 'Показывать все задания') return;
+    dispatch(changeFilterName('Показывать все задания'));
+    onPress();
+  };
+
+  const showDoneHandler = () => {
+    if (activeName === 'Выполненные') return;
+    dispatch(changeFilterName('Выполненные'));
+    onPress();
+  };
+
+  const showNotDoneHandler = () => {
+    if (activeName === 'Не выполненные') return;
+    dispatch(changeFilterName('Не выполненные'));
+    onPress();
+  };
 
   return (
     <>
@@ -55,21 +73,21 @@ export const TogglePopUp: FC<Props> = ({
                 <TouchableHighlight
                   style={{ ...styles.button, ...styles.buttonBottomBorder }}
                   underlayColor={'#ffffff'}
-                  onPress={onPress}
+                  onPress={showAllHandler}
                 >
                   <Text style={showAll}>Показывать все задания</Text>
                 </TouchableHighlight>
                 <TouchableHighlight
                   style={{ ...styles.button, ...styles.buttonBottomBorder }}
                   underlayColor={'#ffffff'}
-                  onPress={onPress}
+                  onPress={showDoneHandler}
                 >
                   <Text style={showDone}>Выполненные</Text>
                 </TouchableHighlight>
                 <TouchableHighlight
                   style={{ ...styles.button, ...styles.buttonBottomBorder }}
                   underlayColor={'#ffffff'}
-                  onPress={onPress}
+                  onPress={showNotDoneHandler}
                 >
                   <Text style={showNotDone}>Не выполненные</Text>
                 </TouchableHighlight>
