@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { MAIN_BUTTON_COLOR } from '../../shared/style/constants';
+import { MAIN_BUTTON_COLOR } from '../../../constants';
 
 type Props = {
   isOpen: boolean;
@@ -66,8 +66,7 @@ const styles = StyleSheet.create({
   },
   container: {
     borderRadius: 8,
-    backgroundColor: '#EBEBF5',
-    opacity: 0.94
+    backgroundColor: 'rgba(249, 249, 249, 0.94)'
   },
   button: {
     height: 56,
@@ -75,7 +74,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   buttonBottomBorder: {
-    borderBottomWidth: 0.3,
+    borderBottomWidth: 1,
     borderColor: '#fff'
   },
   buttonText: {

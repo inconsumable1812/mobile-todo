@@ -1,15 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { TodoItem } from './src/components/TodoItem/TodoItem';
-import { ToggleTodo } from './src/components/ToggleTodo/ToggleTodo';
+import { Provider } from 'react-redux';
+import { Todo } from './src/features/todo';
+import { store } from './src/app/store';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      {/* <StatusBar style="auto" /> */}
-      <ToggleTodo />
-      <TodoItem></TodoItem>
-    </View>
+    <Provider store={store}>
+      <View style={styles.container}>
+        {/* <StatusBar style="auto" /> */}
+        <Todo></Todo>
+      </View>
+    </Provider>
   );
 }
 
@@ -17,7 +19,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff'
-    // alignItems: 'center',
-    // justifyContent: 'center'
   }
 });

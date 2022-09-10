@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { MAIN_BUTTON_COLOR } from '../../shared/style/constants';
+import { MAIN_BUTTON_COLOR } from '../../../constants';
 import { TogglePopUp } from '../TogglePopUp/TogglePopUp';
 
 type Props = {};
 
-export const ToggleTodo: FC<Props> = () => {
+export const ToggleTodoButton: FC<Props> = () => {
   return (
     <>
       <View style={styles.container}>

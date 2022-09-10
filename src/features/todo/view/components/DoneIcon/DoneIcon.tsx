@@ -1,9 +1,6 @@
 import { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
-import {
-  DONE_BUTTON_COLOR,
-  DONE_TEXT_COLOR
-} from '../../shared/style/constants';
+import { DONE_BUTTON_COLOR, DONE_TEXT_COLOR } from '../../../constants';
 import {
   HEIGHT_CONTAINER,
   HEIGHT_ICON,

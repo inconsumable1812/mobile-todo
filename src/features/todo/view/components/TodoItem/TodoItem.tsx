@@ -6,7 +6,7 @@ import {
   MAIN_TEXT_SIZE,
   SECOND_TEXT_LINE_HEIGHT,
   SECOND_TEXT_SIZE
-} from '../../shared/style/constants';
+} from '../../../constants';
 import { DoneIcon } from '../DoneIcon/DoneIcon';
 import { TrashIcon } from '../TrashIcon/TrashIcon';
 
