@@ -1,15 +1,23 @@
 import { FC } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Modal,
+  TouchableHighlight
+} from 'react-native';
 import { MAIN_BUTTON_COLOR } from '../../../constants';
 
 type Props = {
   isOpen: boolean;
   activeName: 'Показывать все задания' | 'Выполненные' | 'Не выполненные';
+  onPress: () => void;
 };
 
 export const TogglePopUp: FC<Props> = ({
   isOpen = false,
-  activeName = 'Показывать все задания'
+  activeName = 'Показывать все задания',
+  onPress
 }) => {
   let showAll = { ...styles.buttonText };
   let showDone = { ...styles.buttonText };
@@ -30,39 +38,47 @@ export const TogglePopUp: FC<Props> = ({
   return (
     <>
       {isOpen && (
-        <View style={styles.popup}>
-          <View style={styles.vertical}>
+        <Modal
+          onRequestClose={onPress}
+          transparent={true}
+          animationType={'fade'}
+        >
+          <View style={styles.wrapper}>
             <View style={styles.container}>
-              <View style={{ ...styles.button, ...styles.buttonBottomBorder }}>
+              <TouchableHighlight
+                style={{ ...styles.button, ...styles.buttonBottomBorder }}
+                underlayColor={'#ffffff'}
+                onPress={onPress}
+              >
                 <Text style={showAll}>Показывать все задания</Text>
-              </View>
-              <View style={{ ...styles.button, ...styles.buttonBottomBorder }}>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={{ ...styles.button, ...styles.buttonBottomBorder }}
+                underlayColor={'#ffffff'}
+                onPress={onPress}
+              >
                 <Text style={showDone}>Выполненные</Text>
-              </View>
-              <View style={styles.button}>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={{ ...styles.button, ...styles.buttonBottomBorder }}
+                underlayColor={'#ffffff'}
+                onPress={onPress}
+              >
                 <Text style={showNotDone}>Не выполненные</Text>
-              </View>
+              </TouchableHighlight>
             </View>
           </View>
-        </View>
+        </Modal>
       )}
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  popup: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    zIndex: 5
-  },
-  vertical: {
+  wrapper: {
     justifyContent: 'center',
-    flex: 1
+    flex: 1,
+    marginHorizontal: 10
   },
   container: {
     borderRadius: 8,
@@ -71,7 +87,8 @@ const styles = StyleSheet.create({
   button: {
     height: 56,
     width: '100%',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderRadius: 8
   },
   buttonBottomBorder: {
     borderBottomWidth: 1,

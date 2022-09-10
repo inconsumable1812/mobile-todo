@@ -4,7 +4,8 @@ import {
   View,
   Text,
   TextInput,
-  TouchableHighlight
+  TouchableHighlight,
+  Modal
 } from 'react-native';
 import { MAIN_TEXT_COLOR, MAIN_BUTTON_COLOR } from '../../../constants';
 
@@ -14,11 +15,14 @@ type Props = {
 };
 
 export const AddTodoPopUp: FC<Props> = ({ isOpen, onPress }) => {
-  // const close
   return (
     <>
       {isOpen && (
-        <View style={styles.popup}>
+        <Modal
+          onRequestClose={onPress}
+          transparent={true}
+          animationType={'fade'}
+        >
           <View style={styles.wrapper}>
             <View style={styles.container}>
               <View style={styles.main}>
@@ -49,22 +53,13 @@ export const AddTodoPopUp: FC<Props> = ({ isOpen, onPress }) => {
               </View>
             </View>
           </View>
-        </View>
+        </Modal>
       )}
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  popup: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    zIndex: 5
-  },
   wrapper: {
     justifyContent: 'center',
     flex: 1,
