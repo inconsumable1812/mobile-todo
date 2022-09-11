@@ -2,7 +2,7 @@
 
 Мобильное приложение "список задач"
 
-Написано на `React Native`, `redux-toolkit`
+Написано на `React Native`, `redux-toolkit`, `TypeScript`
 
 [Ссылка](https://expo.dev/artifacts/eas/cmFscDBLhirntw21VCxhkY.apk) на скачивание APK файла
 
