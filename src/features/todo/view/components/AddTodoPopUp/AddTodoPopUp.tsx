@@ -103,7 +103,8 @@ const styles = StyleSheet.create({
   wrapper: {
     justifyContent: 'center',
     flex: 1,
-    marginHorizontal: 30
+    paddingHorizontal: 30,
+    backgroundColor: 'rgba(0,0,0,0.5)'
   },
   container: {
     borderRadius: 8,
@@ -146,12 +147,14 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7
   },
   buttonBorder: {
     borderRightWidth: 1,
     borderColor: '#fff',
-    borderBottomLeftRadius: 7
+    borderBottomRightRadius: 0
   },
   cancel: {
     color: MAIN_BUTTON_COLOR,

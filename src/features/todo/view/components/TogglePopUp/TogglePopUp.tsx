@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
   wrapper: {
     justifyContent: 'center',
     flex: 1,
-    marginHorizontal: 10
+    paddingHorizontal: 10,
+    backgroundColor: 'rgba(0,0,0,0.5)'
   },
   container: {
     borderRadius: 8,

@@ -30,7 +30,6 @@ export const ToggleTodoButton: FC<Props> = () => {
           </View>
         </TouchableHighlight>
       </View>
-      {isOpen && <View style={styles.popup}></View>}
       <TogglePopUp
         onPress={onPressHandler}
         isOpen={isOpen}
@@ -41,15 +40,6 @@ export const ToggleTodoButton: FC<Props> = () => {
 };
 
 const styles = StyleSheet.create({
-  popup: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    zIndex: 5
-  },
   container: {
     height: 128,
     justifyContent: 'center',

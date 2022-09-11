@@ -1,7 +1,6 @@
 import { FC } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppSelector } from '../../app/hooks';
 import { selectTodo } from './redux/slice';
-import { AddTodoButton } from './view/components/AddTodoButton/AddTodoButton';
 import { TodoList } from './view/components/TodoList/TodoList';
 import { ToggleTodoButton } from './view/components/ToggleTodoButton/ToggleTodoButton';
 
@@ -27,7 +26,6 @@ export const Todo: FC<Props> = () => {
     <>
       <ToggleTodoButton />
       <TodoList todos={filteredTodos}></TodoList>
-      <AddTodoButton></AddTodoButton>
     </>
   );
 };
