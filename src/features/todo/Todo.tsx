@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectTodo, setTodosFromStorage } from './redux/slice';
 import { getTodosData } from './utils';
@@ -15,7 +15,10 @@ export const Todo: FC<Props> = () => {
     if (value === null) return;
     dispatch(setTodosFromStorage(value));
   };
-  getTodosValue();
+
+  useEffect(() => {
+    getTodosValue();
+  }, []);
 
   const { todos, filter } = useAppSelector(selectTodo);
   let filteredTodos = todos;
