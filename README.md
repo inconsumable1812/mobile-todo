@@ -4,7 +4,7 @@
 
 Написано на `React Native`, `redux-toolkit`, `TypeScript`
 
-[Ссылка](https://expo.dev/artifacts/eas/rVHSXpQD3ZSVFgY8WLyXX5.apk) на скачивание APK файла
+[Ссылка](https://expo.dev/artifacts/eas/d9Da7tHnmCUjjLSj52GVFY.apk) на скачивание APK файла
 
 ## Команды проекта
 
